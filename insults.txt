@@ -1,0 +1,5 @@
+Hello %s, you suck!
+Way to go %s, you bozo!
+You are dumb, %s!
+%s is bad at everything! Ha, ha!
+Hi %s! Idiot!

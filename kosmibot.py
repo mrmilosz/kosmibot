@@ -1,8 +1,8 @@
-import random
 import time
 import unicodedata
 
 from bot import Bot
+from insult import Insult
 
 
 class Kosmibot(Bot):
@@ -10,10 +10,11 @@ class Kosmibot(Bot):
         super().__init__(args)
         self.original_username = args.username
         self.ban_iteration = 1
+        self.insult = Insult('insults.txt')
 
     def message_react(self, decoded_text, decoded_username, *decoded_channels):
         if normalize(self.username) in normalize(decoded_text):
-            self.say(get_random_insult(decoded_username), *decoded_channels);
+            self.say(self.insult.get(decoded_username), *decoded_channels);
 
     def kick_react(self, decoded_username, *decoded_channels):
         self.join(*decoded_channels)
@@ -29,19 +30,6 @@ class Kosmibot(Bot):
 
     def get_quit_message(self):
         return 'Am I a bad bot?'
-
-
-def get_random_insult(decoded_username):
-    return random.choice(insults) % decoded_username
-
-
-insults = [
-    'Hello %s, you suck!',
-    'Way to go %s, you bozo!',
-    'You are dumb, %s!',
-    '%s is bad at everything! Ha, ha!',
-    'Hi %s! Idiot!',
-]
 
 
 def normalize(stri):
