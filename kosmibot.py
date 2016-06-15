@@ -13,8 +13,14 @@ class Kosmibot(Bot):
         self.insult = Insult('insults.txt')
 
     def message_react(self, decoded_text, decoded_username, *decoded_channels):
-        if normalize(self.username) in normalize(decoded_text):
-            self.say(self.insult.get(decoded_username), *decoded_channels);
+        normalized_own_username = normalize(self.username)
+        normalized_text = normalize(decoded_text)
+        if normalized_own_username in normalized_text:
+            tokenized_normalized_text = normalized_text.split()
+            if tokenized_normalized_text[0] == normalized_own_username and tokenized_normalized_text[1] == 'praise':
+                self.say('No.', *decoded_channels)
+            else:
+                self.say(self.insult.get(decoded_username), *decoded_channels)
 
     def kick_react(self, decoded_username, *decoded_channels):
         self.join(*decoded_channels)
