@@ -17,7 +17,7 @@ class Kosmibot(Bot):
         normalized_text = normalize(decoded_text)
         if normalized_own_username in normalized_text:
             tokenized_normalized_text = normalized_text.split()
-            if tokenized_normalized_text[0] == normalized_own_username and tokenized_normalized_text[1] == 'praise':
+            if len(tokenized_normalized_text) > 1 and tokenized_normalized_text[0] == normalized_own_username and tokenized_normalized_text[1] == 'praise':
                 self.say('No.', *decoded_channels)
             else:
                 self.say(self.insult.get(decoded_username), *decoded_channels)
