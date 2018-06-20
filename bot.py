@@ -117,6 +117,9 @@ class Bot:
     def get_quit_message(self):
         return 'Leaving.'
 
+    def get_quit_message(self):
+        return None
+
     def handle_error(self, e):
         log(e)
         if e.errno == errno.ECONNRESET:
@@ -126,6 +129,9 @@ class Bot:
 
     def join(self, *decoded_channels):
         self.send('JOIN %s' % ','.join(decoded_channels))
+        join_message = self.get_join_message()
+        if join_message is not None:
+            self.say(join_message, *decoded_channels)
 
     def say(self, decoded_text, *decoded_channels):
         self.send('PRIVMSG %s :%s' % ('.'.join(decoded_channels), decoded_text))

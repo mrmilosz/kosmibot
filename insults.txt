@@ -3,3 +3,4 @@ Way to go %s, you bozo!
 You are dumb, %s!
 %s is bad at everything! Ha, ha!
 Hi %s! Idiot!
+I am here to help.
